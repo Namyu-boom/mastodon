@@ -1,0 +1,77 @@
+- content_for :page_title do
+  = t('admin.settings.social_classic_branding.title', default: 'Social Classic branding')
+
+- content_for :heading do
+  %h1= t('admin.settings.title')
+  = render partial: 'admin/settings/shared/links'
+
+= simple_form_for @admin_settings, url: admin_settings_social_classic_branding_path do |f|
+  = render 'shared/error_messages', object: @admin_settings
+
+  %p.lead= t('admin.settings.social_classic_branding.preamble', default: 'These settings apply server-wide only when the Social Classic theme is selected. Users can still choose light, dark, or system mode.')
+
+  %h2= t('admin.settings.social_classic_branding.light', default: 'Light mode')
+
+  .fields-group
+    = f.input :social_classic_light_theme_color,
+              input_html: { type: 'color' },
+              label: t('admin.settings.social_classic_branding.theme_color', default: 'Theme color'),
+              wrapper: :with_label
+
+  .fields-row
+    .fields-row__column.fields-row__column-6.fields-group
+      = f.input :social_classic_light_logo,
+                as: :file,
+                label: t('admin.settings.social_classic_branding.logo', default: 'Logo'),
+                wrapper: :with_block_label
+      - if @admin_settings.social_classic_light_logo.persisted?
+        = image_tag @admin_settings.social_classic_light_logo.file.url, class: 'fields-group__thumbnail social-classic-branding__logo-preview'
+        = link_to admin_site_upload_path(@admin_settings.social_classic_light_logo), data: { method: :delete }, class: 'link-button link-button--destructive' do
+          = material_symbol 'delete'
+          = t('admin.site_uploads.delete')
+
+    .fields-row__column.fields-row__column-6.fields-group
+      = f.input :social_classic_light_background,
+                as: :file,
+                label: t('admin.settings.social_classic_branding.background', default: 'Background image'),
+                wrapper: :with_block_label
+      - if @admin_settings.social_classic_light_background.persisted?
+        = image_tag @admin_settings.social_classic_light_background.file.url, class: 'fields-group__thumbnail social-classic-branding__background-preview'
+        = link_to admin_site_upload_path(@admin_settings.social_classic_light_background), data: { method: :delete }, class: 'link-button link-button--destructive' do
+          = material_symbol 'delete'
+          = t('admin.site_uploads.delete')
+
+  %hr.spacer/
+  %h2= t('admin.settings.social_classic_branding.dark', default: 'Dark mode')
+
+  .fields-group
+    = f.input :social_classic_dark_theme_color,
+              input_html: { type: 'color' },
+              label: t('admin.settings.social_classic_branding.theme_color', default: 'Theme color'),
+              wrapper: :with_label
+
+  .fields-row
+    .fields-row__column.fields-row__column-6.fields-group
+      = f.input :social_classic_dark_logo,
+                as: :file,
+                label: t('admin.settings.social_classic_branding.logo', default: 'Logo'),
+                wrapper: :with_block_label
+      - if @admin_settings.social_classic_dark_logo.persisted?
+        = image_tag @admin_settings.social_classic_dark_logo.file.url, class: 'fields-group__thumbnail social-classic-branding__logo-preview social-classic-branding__dark-preview'
+        = link_to admin_site_upload_path(@admin_settings.social_classic_dark_logo), data: { method: :delete }, class: 'link-button link-button--destructive' do
+          = material_symbol 'delete'
+          = t('admin.site_uploads.delete')
+
+    .fields-row__column.fields-row__column-6.fields-group
+      = f.input :social_classic_dark_background,
+                as: :file,
+                label: t('admin.settings.social_classic_branding.background', default: 'Background image'),
+                wrapper: :with_block_label
+      - if @admin_settings.social_classic_dark_background.persisted?
+        = image_tag @admin_settings.social_classic_dark_background.file.url, class: 'fields-group__thumbnail social-classic-branding__background-preview'
+        = link_to admin_site_upload_path(@admin_settings.social_classic_dark_background), data: { method: :delete }, class: 'link-button link-button--destructive' do
+          = material_symbol 'delete'
+          = t('admin.site_uploads.delete')
+
+  .actions
+    = f.button :button, t('generic.save_changes'), type: :submit

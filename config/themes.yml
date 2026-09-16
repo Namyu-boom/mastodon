@@ -1,0 +1,2 @@
+default: styles/application.scss
+social_classic: styles/social_classic.scss
