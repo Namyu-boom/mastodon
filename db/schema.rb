@@ -463,8 +463,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_16_003000) do
     t.integer "role", default: 0, null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_conversation_memberships_on_account_id"
-    t.index ["conversation_id", "account_id"], name: "index_conversation_memberships_on_conversation_id_and_account_id", unique: true
-    t.index ["conversation_id", "active"], name: "index_conversation_memberships_on_conversation_id_and_active"
+    t.index ["conversation_id", "account_id"], name: "index_conversation_memberships_on_convo_and_account", unique: true
+    t.index ["conversation_id", "active"], name: "index_conversation_memberships_on_convo_and_active"
   end
 
   create_table "conversation_mutes", force: :cascade do |t|

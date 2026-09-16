@@ -12,8 +12,8 @@ class AddGroupMetadataToConversations < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :conversation_memberships, [:conversation_id, :account_id], unique: true
-    add_index :conversation_memberships, [:conversation_id, :active]
+    add_index :conversation_memberships, [:conversation_id, :account_id], unique: true, name: 'index_conversation_memberships_on_convo_and_account'
+    add_index :conversation_memberships, [:conversation_id, :active], name: 'index_conversation_memberships_on_convo_and_active'
     add_index :conversation_memberships, :account_id
   end
 end
